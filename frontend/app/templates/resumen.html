@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+{% block content %}
+<h1>Resumen de Clasificación por Fecha</h1>
+
+<form method="POST" action="{% url 'resumen_clasificacion_por_fecha' %}">
+    {% csrf_token %}
+    <label for="fecha">Fecha:</label>
+    <input type="text" id="fecha" name="fecha" placeholder="dd/mm/yyyy" required>
+    
+    <label for="empresa">Empresa (opcional):</label>
+    <input type="text" id="empresa" name="empresa">
+
+    <button type="submit">Obtener Resumen</button>
+</form>
+{% if resumen %}
+<h3>Resumen para {{ resumen.fecha }}{% if resumen.empresa %} - {{ resumen.empresa }}{% endif %}</h3>
+<ul>
+    <li>Total de mensajes: {{ resumen.total }}</li>
+    <li>Total de mensajes positivos: {{ resumen.positivos }}</li>
+    <li>Total de mensajes negativos: {{ resumen.negativos }}</li>
+    <li>Total de mensajes neutros: {{ resumen.neutros }}</li>
+</ul>
+<!-- Aquí podrías incluir un gráfico utilizando Plotly o cualquier otra librería -->
+<div id="grafico-resumen">
+    <!-- Inserta el código para renderizar el gráfico aquí, si es necesario -->
+</div>
+{% endif %}
+{% if graph_html %}
+    <div>
+        <h2>Gráfica de Resumen</h2>
+        {{ graph_html|safe }}
+    </div>
+{% endif %}
+
+{% if mensaje_error %}
+    <div class="error-message">
+        <p>{{ mensaje_error }}</p>
+    </div>
+{% endif %}
+{% endblock %}

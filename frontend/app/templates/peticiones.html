@@ -1,0 +1,52 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Peticiones</h1>
+    <div class="peticiones-container">
+        <form action="{% url 'consultar_datos' %}" method="GET">
+            <button type="submit" class="boton-peticion">Consultar Datos</button>
+        </form>
+
+        {% if mensaje_error %}
+        <div class="error-message">
+            <p>{{ mensaje_error }}</p>
+        </div>
+        {% endif %}
+
+        {% if datos_xml %}
+        <div>
+            <h2>Datos Consultados</h2>
+            <textarea rows="10" cols="40" readonly>{{ datos_xml }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+
+    <h2>Analizar Mensaje de Prueba</h2>
+    <form action="{% url 'analizar_mensaje_prueba' %}" method="POST">
+        {% csrf_token %}
+        <div style="display: flex; gap: 10px;">
+            <div>
+                <label for="mensaje">Mensaje enviado (XML):</label><br>
+                <textarea id="mensaje" name="mensaje" rows="10" cols="40">{{ mensaje }}</textarea>
+            </div>
+            
+            <div>
+                <label for="datos_respuesta">Respuesta del análisis:</label><br>
+                <textarea id="datos_respuesta" rows="10" cols="40" readonly>{{ datos_respuesta }}</textarea>
+            </div>
+        </div>
+        <button type="submit" class="boton-analizar">Enviar Mensaje para Análisis</button>
+    </form>
+
+    <h2>Resumen de Clasificación por Fecha</h2>
+    <form action="{% url 'resumen_clasificacion_por_fecha' %}" method="POST">
+        {% csrf_token %}
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" placeholder="dd/mm/yyyy" required>
+        
+        <label for="empresa">Empresa (opcional):</label>
+        <input type="text" id="empresa" name="empresa">
+        
+        <button type="submit" class="boton-clasificacion">Obtener Resumen</button>
+    </form>
+
+{% endblock %}

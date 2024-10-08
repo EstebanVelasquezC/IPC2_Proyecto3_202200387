@@ -1,0 +1,28 @@
+{
+    "solicitud_clasificacion": {
+      "diccionario": {
+        "sentimientos_positivos": { "palabra": ["bueno", "excelente", "satisfecho"] },
+        "sentimientos_negativos": { "palabra": ["malo", "pésimo", "molesto"] },
+        "empresas_analizar": {
+          "empresa": [
+            {
+              "nombre": "USAC",
+              "servicios": {
+                "servicio": [
+                  { "@nombre": "inscripción", "alias": ["inscribí", "inscrito"] },
+                  { "@nombre": "graduación", "alias": ["graduado"] }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "lista_mensajes": {
+        "mensaje": [
+          "Lugar y fecha: Guatemala, 01/04/2022 15:01 Usuario: usuario1 Red social: Twitter El servicio en la USAC fue muy bueno.",
+          "Lugar y fecha: Guatemala, 01/04/2022 15:20 Usuario: usuario2 Red social: Facebook Me inscribí en la USAC y fue un proceso molesto."
+        ]
+      }
+    }
+  }
+  
