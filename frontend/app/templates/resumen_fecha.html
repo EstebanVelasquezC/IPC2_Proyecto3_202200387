@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Resumen de Clasificación por Fecha</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="fecha">Fecha (dd/mm/yyyy):</label>
+        <input type="text" id="fecha" name="fecha" required>
+        
+        <label for="empresa">Empresa:</label>
+        <input type="text" id="empresa" name="empresa">
+        
+        <button type="submit">Consultar</button>
+    </form>
+
+    {% if resumen %}
+        <h2>Resumen para {{ fecha }} {% if empresa %} y empresa "{{ empresa }}" {% else %} y todas las empresas {% endif %}</h2>
+        <p>Total de Mensajes: {{ resumen.total_mensajes }}</p>
+        <p>Mensajes Positivos: {{ resumen.positivos }}</p>
+        <p>Mensajes Negativos: {{ resumen.negativos }}</p>
+        <p>Mensajes Neutros: {{ resumen.neutros }}</p>
+    {% elif error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+{% endblock %}

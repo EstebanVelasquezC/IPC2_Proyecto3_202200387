@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Peticiones</h1>
+    <div class="peticiones-container">
+        <form action="{% url 'consultar_datos' %}" method="GET">
+            <button type="submit" class="boton-peticion">Consultar Datos</button>
+        </form>
+
+        {% if mensaje_error %}
+        <div class="error-message">
+            <p>{{ mensaje_error }}</p>
+        </div>
+        {% endif %}
+
+        {% if datos_xml %}
+        <div>
+            <h2>Datos Consultados</h2>
+            <textarea rows="20" cols="80" readonly>{{ datos_xml }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
