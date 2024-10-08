@@ -1,0 +1,12 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Cargar Archivo</h1>
+    <div>
+        <form action="/" method="POST" class="formulario" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="archivo" id="archivo" accept=".xml">
+            <textarea name="contenido" id="contenido" rows="25">{{contenido}}</textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+{% endblock %}
