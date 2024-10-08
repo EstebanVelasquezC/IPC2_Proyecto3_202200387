@@ -1,0 +1,54 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Cargar Archivo</h1>
+    <div>
+        <form action="/" method="POST" class="formulario" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="archivo" id="archivo" accept=".xml">
+            <textarea name="contenido" id="contenido" rows="25">{{contenido}}</textarea>
+            <button type="submit">Enviar</button>
+        </form>
+
+        {% if mensaje %}
+        <div>
+            <p>{{ mensaje }}</p>
+        </div>
+        {% endif %}
+
+        {% if resumen %}
+        <div>
+            <h2>Resumen de Clasificación</h2>
+            <p>Total de Mensajes: {{ resumen.total_mensajes }}</p>
+            <p>Mensajes Positivos: {{ resumen.positivos }}</p>
+            <p>Mensajes Negativos: {{ resumen.negativos }}</p>
+            <p>Mensajes Neutros: {{ resumen.neutros }}</p>
+
+            <h3>Análisis por Empresa</h3>
+            <ul>
+                {% for empresa, datos in resumen.analisis_empresas.items %}
+                <li>
+                    <h4>{{ empresa|capfirst }}</h4>
+                    <p>Total de Mensajes: {{ datos.total }}</p>
+                    <p>Positivos: {{ datos.positivos }}</p>
+                    <p>Negativos: {{ datos.negativos }}</p>
+                    <p>Neutros: {{ datos.neutros }}</p>
+
+                    <h5>Servicios:</h5>
+                    <ul>
+                        {% for servicio, detalles in datos.servicios.items %}
+                        <li>
+                            <strong>{{ servicio|capfirst }}</strong>
+                            <p>Total de Mensajes: {{ detalles.total }}</p>
+                            <p>Positivos: {{ detalles.positivos }}</p>
+                            <p>Negativos: {{ detalles.negativos }}</p>
+                            <p>Neutros: {{ detalles.neutros }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

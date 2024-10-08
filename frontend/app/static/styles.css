@@ -1,0 +1,13 @@
+
+
+.formulario {
+    background-color: #ababab;
+    border-radius: 15px;
+
+    max-width: 500px;
+    margin: 30px;
+    padding: 15px;;
+
+    display: flex;
+    flex-direction: column;
+}
